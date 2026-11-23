@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Agent Activity{% endblock %}
+{% block page_title %}Agent Activity{% endblock %}
+{% block breadcrumb %}Agent Activity{% endblock %}
+
+{% block content %}
+<section class="panel panel--log">
+  <div class="viz-block__header"><h2>Pipeline runs</h2><span class="muted" id="runs-count"></span></div>
+
+  <div class="history-controls">
+    <div class="filter-tabs" id="run-filters">
+      <button class="filter-tab is-active" data-status="">All</button>
+      <button class="filter-tab" data-status="completed">Completed</button>
+      <button class="filter-tab" data-status="failed">Failed</button>
+      <button class="filter-tab" data-status="running">Running</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th>Started</th>
+          <th>Part</th>
+          <th>Status</th>
+          <th>Agents</th>
+          <th>Duration</th>
+          <th>Tokens</th>
+          <th>Est. cost</th>
+        </tr>
+      </thead>
+      <tbody id="runs-table-body"></tbody>
+    </table>
+  </div>
+  <div class="empty-state" id="runs-empty" hidden>
+    <p>No pipeline runs recorded yet. Submit a pricing request from the Workspace to see traces here.</p>
+  </div>
+</section>
+
+<section class="panel panel--log" id="run-detail-panel" hidden>
+  <div class="viz-block__header">
+    <h2 id="run-detail-title">Run detail</h2>
+    <button class="filter-tab" id="run-detail-close">Close</button>
+  </div>
+  <div id="run-detail-body" class="agent-timeline"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/agent-activity.js"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block page_title %}Sign in{% endblock %}
+{% block breadcrumb %}Sign in{% endblock %}
+
+{% block content %}
+{% if needs_setup %}
+<section class="panel login-panel">
+  <h2>Create the first admin account</h2>
+  <p class="muted">No accounts exist yet. This one-time setup creates the first admin, who can then create everyone else from User Management.</p>
+
+  <form id="setup-form" class="login-form">
+    <label class="field-label" for="setup-username">Username</label>
+    <input class="field-select" id="setup-username" autocomplete="username" required />
+
+    <label class="field-label" for="setup-display-name">Display name</label>
+    <input class="field-select" id="setup-display-name" required />
+
+    <label class="field-label" for="setup-password">Password</label>
+    <input class="field-select" id="setup-password" type="password" autocomplete="new-password" required />
+
+    <p class="muted login-form__error" id="setup-error" hidden></p>
+
+    <button class="btn btn--primary" type="submit">Create admin account</button>
+  </form>
+</section>
+{% else %}
+<section class="panel login-panel">
+  <h2>Sign in</h2>
+  <p class="muted">Sign in with your pricing-leader or admin account to continue.</p>
+
+  <form id="login-form" class="login-form">
+    <label class="field-label" for="login-username">Username</label>
+    <input class="field-select" id="login-username" name="username" type="text" autocomplete="username" required />
+
+    <label class="field-label" for="login-password">Password</label>
+    <input class="field-select" id="login-password" name="password" type="password" autocomplete="current-password" required />
+
+    <p class="muted login-form__error" id="login-error" hidden></p>
+
+    <button class="btn btn--primary" type="submit">Sign in</button>
+  </form>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const LOGIN_NEXT = {{ next | tojson }};
+  const NEEDS_SETUP = {{ needs_setup | tojson }};
+</script>
+<script src="/assets/login.js"></script>
+{% endblock %}

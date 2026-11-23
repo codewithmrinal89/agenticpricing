@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Approval Queue{% endblock %}
+{% block page_title %}Approval Queue{% endblock %}
+{% block breadcrumb %}Approval Queue{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <div class="viz-block__header">
+    <h2>Pricing decisions awaiting review</h2>
+    <span class="muted" id="approvals-count"></span>
+  </div>
+
+  <div class="filter-tabs" id="approval-filters">
+    <button class="filter-tab is-active" data-status="pending">Pending</button>
+    <button class="filter-tab" data-status="approved">Approved</button>
+    <button class="filter-tab" data-status="rejected">Rejected</button>
+    <button class="filter-tab" data-status="">All</button>
+  </div>
+
+  <div id="approvals-list" class="approvals-list"></div>
+  <div class="empty-state" id="approvals-empty" hidden>
+    <p>No decisions in this queue.</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/approvals.js"></script>
+{% endblock %}

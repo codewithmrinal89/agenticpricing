@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Category Overrides{% endblock %}
+{% block page_title %}Admin &middot; Category Overrides{% endblock %}
+{% block breadcrumb %}Category Overrides{% endblock %}
+
+{% block content %}
+{% include "_admin_subnav.html" %}
+
+<section class="panel panel--log">
+  <div class="viz-block__header"><h2>Category overrides</h2><span class="muted">Overrides the global target/min margin for specific categories</span></div>
+  <div class="table-wrap">
+    <table class="audit-table">
+      <thead>
+        <tr><th>Category</th><th>Target margin %</th><th>Min margin %</th><th></th></tr>
+      </thead>
+      <tbody id="category-overrides-body"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/admin-category-overrides.js"></script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}User Management{% endblock %}
+{% block page_title %}Admin &middot; Users{% endblock %}
+{% block breadcrumb %}Users{% endblock %}
+
+{% block content %}
+{% include "_admin_subnav.html" %}
+
+<section class="panel">
+  <div class="viz-block__header"><h2>Create user</h2><span class="muted">Admins and category approvers</span></div>
+
+  <form id="create-user-form" class="admin-form">
+    <div>
+      <label class="field-label" for="new-username">Username</label>
+      <input class="field-select" id="new-username" required />
+    </div>
+    <div>
+      <label class="field-label" for="new-password">Password</label>
+      <input class="field-select" id="new-password" type="password" required />
+    </div>
+    <div>
+      <label class="field-label" for="new-display-name">Display name</label>
+      <input class="field-select" id="new-display-name" required />
+    </div>
+    <div>
+      <label class="field-label" for="new-role">Role</label>
+      <select class="field-select" id="new-role">
+        <option value="approver">Approver (pricing leader)</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    <div class="admin-form__full" id="new-categories-wrap">
+      <label class="field-label">Categories this approver can review</label>
+      <div class="category-picker" id="new-categories-picker"></div>
+    </div>
+    <div class="admin-form__full">
+      <p class="muted login-form__error" id="create-user-error" hidden></p>
+      <button class="btn btn--primary" type="submit">Create user</button>
+    </div>
+  </form>
+</section>
+
+<section class="panel panel--log">
+  <div class="viz-block__header"><h2>Users</h2><span class="muted" id="users-count"></span></div>
+  <div class="table-wrap">
+    <table class="audit-table user-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Display name</th>
+          <th>Role</th>
+          <th>Categories</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="users-table-body"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/admin-users.js"></script>
+{% endblock %}

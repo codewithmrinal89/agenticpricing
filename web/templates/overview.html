@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock %}
+{% block page_title %}Overview{% endblock %}
+{% block breadcrumb %}Overview{% endblock %}
+
+{% block content %}
+<section class="dashboard-row-1">
+  <div class="hero-card">
+    <div>
+      <p class="hero-card__meta" id="hero-date">&nbsp;</p>
+      <p class="hero-card__eyebrow">AeroPrice Intelligence</p>
+      <h2 class="hero-card__title" id="hero-greeting">Welcome{% if current_user %}, {{ current_user.display_name }}{% endif %}</h2>
+      <p class="hero-card__subtitle" id="hero-summary">Your autonomous pricing agents are ready.</p>
+      <div class="hero-card__actions">
+        <a class="btn btn--primary btn--auto" href="/workspace">New Pricing Request</a>
+        <a class="btn btn--secondary btn--auto" href="/approvals">Review Decisions</a>
+      </div>
+      <div class="hero-card__actions hero-card__actions--secondary">
+        <a class="btn btn--tertiary" href="/agent-activity">Agent Activity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a class="btn btn--tertiary" href="#performance-panel">View Performance <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+    <div class="hero-card__visual" id="hero-visual">
+      <svg class="hero-network" viewBox="0 0 260 220" role="img" aria-label="AeroPrice AI agent orchestration network">
+        <defs>
+          <radialGradient id="hero-core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="var(--brand-primary)" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="var(--brand-primary)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <circle class="hero-network__glow" cx="130" cy="110" r="46" fill="url(#hero-core-glow)"/>
+
+        <path class="hero-network__spoke" data-spoke="0" d="M130,110 L130,25"/>
+        <path class="hero-network__spoke" data-spoke="1" d="M130,110 L203.6,67.5"/>
+        <path class="hero-network__spoke" data-spoke="2" d="M130,110 L203.6,152.5"/>
+        <path class="hero-network__spoke" data-spoke="3" d="M130,110 L130,195"/>
+        <path class="hero-network__spoke" data-spoke="4" d="M130,110 L56.4,152.5"/>
+        <path class="hero-network__spoke" data-spoke="5" d="M130,110 L56.4,67.5"/>
+
+        <circle class="hero-network__particle" data-spoke="0" r="2.4"/>
+        <circle class="hero-network__particle" data-spoke="1" r="2.4"/>
+        <circle class="hero-network__particle" data-spoke="2" r="2.4"/>
+        <circle class="hero-network__particle" data-spoke="3" r="2.4"/>
+        <circle class="hero-network__particle" data-spoke="4" r="2.4"/>
+        <circle class="hero-network__particle" data-spoke="5" r="2.4"/>
+
+        <g class="hero-network__core">
+          <circle class="hero-network__core-ring" cx="130" cy="110" r="29"/>
+          <circle class="hero-network__core-fill" cx="130" cy="110" r="21"/>
+          <circle class="hero-network__core-orbit" cx="130" cy="110" r="36"/>
+          <text class="hero-network__core-label" x="130" y="114" text-anchor="middle">AI</text>
+        </g>
+
+        <g class="hero-network__node" data-stage="Enterprise Data Retrieval Agent" tabindex="0" role="button"
+           aria-label="Enterprise Data Retrieval Agent" transform="translate(130,25)">
+          <circle r="13"/>
+          <path class="hero-network__icon" d="M-5,-4 L5,-4 M-5,0 L5,0 M-5,4 L5,4"/>
+        </g>
+        <g class="hero-network__node" data-stage="Inventory & Shipability Agent" tabindex="0" role="button"
+           aria-label="Inventory and Shipability Agent" transform="translate(203.6,67.5)">
+          <circle r="13"/>
+          <rect class="hero-network__icon" x="-5" y="-5" width="10" height="10" rx="1.5"/>
+        </g>
+        <g class="hero-network__node" data-stage="Cost & Margin Agent" tabindex="0" role="button"
+           aria-label="Cost and Margin Agent" transform="translate(203.6,152.5)">
+          <circle r="13"/>
+          <circle class="hero-network__icon" r="4.6"/>
+          <path class="hero-network__icon" d="M0,-2.6 V2.6"/>
+        </g>
+        <g class="hero-network__node" data-stage="Pricing Strategy Agent" tabindex="0" role="button"
+           aria-label="Pricing Strategy Agent" transform="translate(130,195)">
+          <circle r="13"/>
+          <path class="hero-network__icon" d="M-4.5,4.5 L4.5,-4.5 M0.5,-4.5 L4.5,-4.5 L4.5,-0.5"/>
+        </g>
+        <g class="hero-network__node" data-stage="Decision Gate" tabindex="0" role="button"
+           aria-label="Decision Gate" transform="translate(56.4,152.5)">
+          <circle r="13"/>
+          <path class="hero-network__icon" d="M0,-5.5 L5.5,0 L0,5.5 L-5.5,0 Z"/>
+        </g>
+        <g class="hero-network__node" data-stage="Approval Agent" tabindex="0" role="button"
+           aria-label="Approval Agent" transform="translate(56.4,67.5)">
+          <circle r="13"/>
+          <path class="hero-network__icon" d="M-4,0 L-1,3.2 L4.2,-4"/>
+        </g>
+      </svg>
+      <p class="hero-network__status muted" id="hero-pipeline-status">Loading pipeline status&hellip;</p>
+      <div class="hero-network__tooltip" id="hero-network-tooltip" hidden></div>
+    </div>
+  </div>
+
+  <div class="panel panel--row-fill">
+    <div class="viz-block__header"><h2>Pending approvals</h2><span class="muted" id="approval-preview-count"></span></div>
+    <p class="muted" style="margin:-6px 0 10px;">Actionable items awaiting your decision right now</p>
+    <div class="approval-preview" id="approval-preview-list">
+      <div class="empty-state-inline">Loading&hellip;</div>
+    </div>
+  </div>
+</section>
+
+<section class="dashboard-row-2">
+  <div class="kpi-card kpi-card--emerald">
+    <span class="kpi-card__label">Parts priced</span>
+    <span class="kpi-card__value" id="kpi-total-requests">&mdash;</span>
+    <span class="kpi-card__detail">Across all requests this session</span>
+  </div>
+
+  <div class="kpi-card kpi-card--purple">
+    <span class="kpi-card__label">Pricing adjustments identified</span>
+    <span class="kpi-card__value" id="kpi-total-impact">&mdash;</span>
+    <span class="kpi-card__detail" id="kpi-avg-change-detail">&nbsp;</span>
+  </div>
+
+  <div class="panel panel--row-fill">
+    <div class="viz-block__header"><h2>Agent activity</h2><span class="muted"><a class="btn btn--tertiary" style="padding:0;" href="/agent-activity">View all</a></span></div>
+    <div class="activity-timeline-compact" id="activity-timeline">
+      <div class="empty-state-inline">Loading&hellip;</div>
+    </div>
+  </div>
+</section>
+
+<section class="dashboard-row-3">
+  <section class="panel panel--breakdown">
+    <div class="viz-block__header"><h2>Decision mix</h2><span class="muted">Auto-approved vs. pending review</span></div>
+    <div class="breakdown-legend">
+      <span class="legend-item"><span class="legend-swatch legend-swatch--good"></span>Auto-approved</span>
+      <span class="legend-item"><span class="legend-swatch legend-swatch--warning"></span>Pending review</span>
+    </div>
+    <div class="breakdown-columns">
+      <div>
+        <p class="breakdown-columns__title">By category</p>
+        <div id="breakdown-category" class="breakdown-list"></div>
+      </div>
+      <div>
+        <p class="breakdown-columns__title">By lifecycle status</p>
+        <div id="breakdown-lifecycle" class="breakdown-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="performance-panel">
+    <div class="viz-block__header"><h2>Agent performance</h2><span class="muted">Automation rate and execution health</span></div>
+    <div class="performance-panel">
+      <div class="circular-progress" style="width:110px;height:110px;">
+        <svg viewBox="0 0 120 120" width="110" height="110">
+          <circle class="circular-progress__track" cx="60" cy="60" r="50"></circle>
+          <circle class="circular-progress__value" cx="60" cy="60" r="50" id="performance-circle"></circle>
+        </svg>
+        <div class="circular-progress__label">
+          <strong id="performance-rate">&mdash;</strong>
+          <span>Straight-through</span>
+        </div>
+      </div>
+      <div class="performance-rows">
+        <div class="performance-row">
+          <svg class="performance-row__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="performance-row__label">Total flagged for review <span class="muted">(lifetime)</span></span>
+          <span class="performance-row__value" id="kpi-pending-count">&mdash;</span>
+        </div>
+        <div class="performance-row">
+          <svg class="performance-row__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+          <span class="performance-row__label">Avg. time per part</span>
+          <span class="performance-row__value" id="kpi-avg-duration">&mdash;</span>
+        </div>
+        <div class="performance-row">
+          <svg class="performance-row__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <span class="performance-row__label">Avg. recommended change</span>
+          <span class="performance-row__value" id="kpi-avg-change">&mdash;</span>
+        </div>
+        <div class="performance-row">
+          <svg class="performance-row__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span class="performance-row__label">Agent execution success rate</span>
+          <span class="performance-row__value" id="perf-success-rate">&mdash;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/overview.js"></script>
+{% endblock %}

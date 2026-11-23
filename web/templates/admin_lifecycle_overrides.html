@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Lifecycle Overrides{% endblock %}
+{% block page_title %}Admin &middot; Lifecycle Overrides{% endblock %}
+{% block breadcrumb %}Lifecycle Overrides{% endblock %}
+
+{% block content %}
+{% include "_admin_subnav.html" %}
+
+<section class="panel panel--log">
+  <div class="viz-block__header"><h2>Lifecycle overrides</h2><span class="muted">Overrides min margin / forces approval for a lifecycle status</span></div>
+  <div class="table-wrap">
+    <table class="audit-table">
+      <thead>
+        <tr><th>Lifecycle status</th><th>Min margin %</th><th>Requires approval</th><th>Note</th><th></th></tr>
+      </thead>
+      <tbody id="lifecycle-overrides-body"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/admin-lifecycle-overrides.js"></script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Pricing Workspace{% endblock %}
+{% block page_title %}Pricing Workspace{% endblock %}
+{% block breadcrumb %}Pricing Workspace{% endblock %}
+
+{% block content %}
+<div class="workspace-grid">
+  <section class="panel panel--request">
+    <h2>New pricing request</h2>
+
+    <label class="field-label" for="part-search">Part numbers</label>
+    <div class="combobox" id="part-combobox">
+      <input
+        type="text"
+        id="part-search"
+        class="field-select"
+        autocomplete="off"
+        placeholder="Search to add a part..."
+      />
+      <ul class="combobox__list" id="part-list" hidden></ul>
+    </div>
+
+    <div class="chip-row" id="selected-chips"></div>
+
+    <button id="run-button" class="btn btn--primary" disabled>Run AI pricing analysis</button>
+  </section>
+
+  <section class="panel panel--result" id="result-panel">
+    <div class="agent-flow" id="agent-flow" hidden>
+      <p class="agent-flow__part" id="agent-flow-part"></p>
+      <div class="flow">
+        <div class="flow__group">
+          <div class="flow__node flow__node--mini" data-node="Enterprise Data Retrieval Agent">
+            <span class="flow__node-icon"></span><span class="flow__node-label">Data Retrieval</span>
+          </div>
+          <div class="flow__node flow__node--mini" data-node="Inventory & Shipability Agent">
+            <span class="flow__node-icon"></span><span class="flow__node-label">Inventory</span>
+          </div>
+          <div class="flow__node flow__node--mini" data-node="Cost & Margin Agent">
+            <span class="flow__node-icon"></span><span class="flow__node-label">Cost &amp; Margin</span>
+          </div>
+        </div>
+        <div class="flow__arrow"></div>
+        <div class="flow__node" data-node="Pricing Strategy Agent">
+          <span class="flow__node-icon"></span><span class="flow__node-label">Pricing Strategy</span>
+        </div>
+        <div class="flow__arrow"></div>
+        <div class="flow__node" data-node="Decision Gate">
+          <span class="flow__node-icon"></span><span class="flow__node-label">Decision Gate</span>
+        </div>
+        <div class="flow__arrow" id="flow-arrow-approval" hidden></div>
+        <div class="flow__node" data-node="Approval Agent" id="flow-node-approval" hidden>
+          <span class="flow__node-icon"></span><span class="flow__node-label">Approval Agent</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="empty-state">
+      <p>Search and select one or more parts, then run a pricing request to see the Supervisor&rsquo;s decisions here.</p>
+    </div>
+
+    <div id="results-container"></div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/workspace.js"></script>
+{% endblock %}
